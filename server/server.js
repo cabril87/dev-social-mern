@@ -1,0 +1,16 @@
+import express from 'express'
+import connectDB from './config/db.js'
+
+
+const app = express()
+
+//Connect DB
+connectDB();
+
+app.get('/', (req, res) => {
+    res.send(' API running')
+})
+
+const PORT = process.env.PORT || 5000
+
+app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
