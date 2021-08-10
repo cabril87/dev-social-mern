@@ -1,7 +1,14 @@
 import express from 'express';
 import auth from '../../middleware/auth.js'
 import { check } from 'express-validator';
-import { profileGetOne, profileCreateOne, profileGetAll, profileGetOneUser } from '../../controllers/profileController.js'
+import {
+    profileGetOne,
+    profileCreateOne,
+    profileGetAll,
+    profileGetOneUser,
+    profileDelete,
+    profileAddExperience
+} from '../../controllers/profileController.js'
 
 const router = express.Router();
 
@@ -19,5 +26,22 @@ router.post('/', [
 );
 router.get('/', profileGetAll)
 router.get('/user/:user_id', profileGetOneUser)
+router.delete('/', auth, profileDelete)
+router.put('/experience', [
+    auth,
+    [
+        check('title', 'Title is required')
+            .not()
+            .isEmpty(),
+        check('company', 'Company is required')
+            .not()
+            .isEmpty(),
+        check('from', 'From date is required')
+            .not()
+            .isEmpty(),
+    ]
+],
+    profileAddExperience
+)
 
 export default router;

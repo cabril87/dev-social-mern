@@ -113,3 +113,78 @@ export const profileGetOneUser = async (req, res) => {
         res.status(500).send('Server Error')
     }
 }
+
+export const profileDelete = async (req, res) => {
+    try {
+        //Remove user post
+
+        //Remove profile
+        await Profile.findOneAndRemove({ user: req.user.id})
+        //Remove User
+        await User.findOneAndRemove({ _id: req.user.id})
+        res.json({ msg: 'User deleted'});
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error')
+    }
+}
+
+export const profileAddExperience = async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    } 
+
+    const {
+        title,
+        company,
+        location,
+        from,
+        to,
+        current,
+        description
+    } = req.body;
+
+    const newExp = {
+        title,
+        company,
+        location,
+        from,
+        to,
+        current,
+        description
+    }
+
+    const profileFields = {};
+    profileFields.experience = {}
+    if (current) profileFields.experience.current = current;
+    if (title) profileFields.experience.title = title;
+    if (company) profileFields.experience.company = company;
+    if (location) profileFields.experience.location= location;
+    if (from) profileFields.experience.from = from;
+    if (description) profileFields.experience.description = description;
+
+    try {
+        let profile = await Profile.findOne({ user: req.user.id })
+
+        if (profile) {
+            profile = await Profile.findOneAndUpdate(
+                { user: req.user.id },
+                { $set: profileFields },
+                { new: true }
+            );
+            return res.json(profile)
+        }
+
+        profile.experience.unshift(newExp)
+
+        await profile.save()
+
+        res.json(profile)
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error')
+    }
+
+
+}
