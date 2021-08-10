@@ -1,4 +1,0 @@
-{
-    "mongoURI": "mongodb+srv://cab:cab@cluster0.sh0yu.mongodb.net/devSocial?retryWrites=true&w=majority",
-    "jwtSecret": "devSecretWebToken"
-}
