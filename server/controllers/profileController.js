@@ -119,10 +119,10 @@ export const profileDelete = async (req, res) => {
         //Remove user post
 
         //Remove profile
-        await Profile.findOneAndRemove({ user: req.user.id})
+        await Profile.findOneAndRemove({ user: req.user.id })
         //Remove User
-        await User.findOneAndRemove({ _id: req.user.id})
-        res.json({ msg: 'User deleted'});
+        await User.findOneAndRemove({ _id: req.user.id })
+        res.json({ msg: 'User deleted' });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error')
@@ -131,9 +131,9 @@ export const profileDelete = async (req, res) => {
 
 export const profileAddExperience = async (req, res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()) {
+    if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
-    } 
+    }
 
     const {
         title,
@@ -160,7 +160,7 @@ export const profileAddExperience = async (req, res) => {
     if (current) profileFields.experience.current = current;
     if (title) profileFields.experience.title = title;
     if (company) profileFields.experience.company = company;
-    if (location) profileFields.experience.location= location;
+    if (location) profileFields.experience.location = location;
     if (from) profileFields.experience.from = from;
     if (description) profileFields.experience.description = description;
 
@@ -188,3 +188,96 @@ export const profileAddExperience = async (req, res) => {
 
 
 }
+
+export const profileDeleteExperience = async (req, res) => {
+    try {
+        const foundProfile = await Profile.findOne({ user: req.user.id });
+
+        foundProfile.experience = foundProfile.experience.filter(
+            (exp) => exp._id.toString() !== req.params.exp_id
+        );
+
+        await foundProfile.save();
+        return res.status(200).json(foundProfile);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ msg: 'Server error' });
+    }
+}
+
+export const profileAddEducation = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    }
+
+    const {
+        school,
+        degree,
+        fieldofstudy,
+        from,
+        to,
+        current,
+        description
+    } = req.body;
+
+    const newEdu = {
+        school,
+        degree,
+        fieldofstudy,
+        from,
+        to,
+        current,
+        description
+    }
+
+    const profileFields = {};
+    profileFields.education = {}
+    if (current) profileFields.education.current = current;
+    if (school) profileFields.education.school = school;
+    if (degree) profileFields.education.degree = degree;
+    if (fieldofstudy) profileFields.education.fieldofstudy = fieldofstudy;
+    if (from) profileFields.education.from = from;
+    if (description) profileFields.education.description = description;
+
+    try {
+        let profile = await Profile.findOne({ user: req.user.id })
+
+        if (profile) {
+            profile = await Profile.findOneAndUpdate(
+                { user: req.user.id },
+                { $set: profileFields },
+                { new: true }
+            );
+            return res.json(profile)
+        }
+
+        profile.education.unshift(newEdu)
+
+        await profile.save()
+
+        res.json(profile)
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error')
+    }
+
+
+}
+
+export const profileDeleteEducation = async (req, res) => {
+    try {
+        const foundProfile = await Profile.findOne({ user: req.user.id });
+
+        foundProfile.education = foundProfile.education.filter(
+            (edu) => edu._id.toString() !== req.params.edu_id
+        );
+
+        await foundProfile.save();
+        return res.status(200).json(foundProfile);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ msg: 'Server error' });
+    }
+}
+
