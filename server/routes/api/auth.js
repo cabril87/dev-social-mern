@@ -1,10 +1,11 @@
 import express from 'express';
+import auth from '../../middleware/auth.js'
 
 import { authController } from '../../controllers/authController.js'
 
 const router = express.Router();
 
-router.get('/', authController)
+router.get('/',  auth, authController)
 
 export default router;
 
