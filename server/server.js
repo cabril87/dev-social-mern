@@ -4,6 +4,7 @@ import users from './routes/api/users.js'
 import auth from './routes/api/auth.js'
 import profile from './routes/api/profile.js'
 import posts from './routes/api/posts.js'
+import dotenv from 'dotenv'
 
 
 const app = express()
