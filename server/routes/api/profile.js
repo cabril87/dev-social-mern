@@ -10,7 +10,8 @@ import {
     profileAddExperience,
     profileDeleteExperience,
     profileAddEducation,
-    profileDeleteEducation
+    profileDeleteEducation,
+    profileGithub
 } from '../../controllers/profileController.js'
 
 const router = express.Router();
@@ -67,5 +68,6 @@ router.put('/education', [
     profileAddEducation
 )
 router.delete('/education/:edu_id', auth, profileDeleteEducation)
+router.get('/github/:username', profileGithub)
 
 export default router;
