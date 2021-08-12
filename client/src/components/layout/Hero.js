@@ -16,7 +16,7 @@ const Hero = () => {
             lg:w-screen
             ">
                 <div className="flex flex-1 mr-8 flex-col items-center lg:items-start  lg:ml-44 lg:mr-12 lg:ml-96">
-                    <h2 className="text-color-blue text-3xl md:text-4 lg:text-5xl text-center lg:text-left mb-6">
+                    <h2 className="text-color-blue text-6xl md:text-6xl lg:text-6xl text-center lg:text-left mb-6">
                         <b>DevSocial</b>
                     </h2>
                     <p className="text-color-grey text-lg text-center lg:text-left mb-6 w-80">A place for developers to connect, learn, and share knowledge.</p>
