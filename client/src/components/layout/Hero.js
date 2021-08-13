@@ -35,7 +35,7 @@ const Hero = () => {
                     <button type="button" className="btn bg-color-red text-white w-32 hover:bg-color-grey">Login</button>
                 </div>
             </div>
-            <div className="flex justify-center lg:mb-0 mr-8 z-0 md:z-10">
+            <div className="flex justify-center lg:mb-0 mr-8 z-10">
                 <img src={dev} alt="dev" />
 
             </div>

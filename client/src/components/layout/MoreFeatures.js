@@ -21,7 +21,7 @@ const MoreFeatures = () => {
                     </div>
                     <hr className="border-b border-color-white" />
                     <div className="flex p-6">
-                        <button type="button" class="btn  flex-1 bg-color-blue text-color-white hover:bg-color-white hover:text-black">More Info</button>
+                        <button type="button" className="btn  flex-1 bg-color-blue text-color-white hover:bg-color-white hover:text-black">More Info</button>
                     </div>
                 </div>
                 <div className="flex flex-col rounded-md shadow-md  ">
@@ -32,7 +32,7 @@ const MoreFeatures = () => {
                     </div>
                     <hr className="border-b border-color-white" />
                     <div className="flex p-6">
-                        <button type="button" class="btn  flex-1 bg-color-blue text-color-white hover:bg-color-white hover:text-black">More Info</button>
+                        <button type="button" className="btn  flex-1 bg-color-blue text-color-white hover:bg-color-white hover:text-black">More Info</button>
                     </div>
                 </div>
                 <div className="flex flex-col rounded-md shadow-md  ">
@@ -43,7 +43,7 @@ const MoreFeatures = () => {
                     </div>
                     <hr className="border-b border-color-white" />
                     <div className="flex p-6">
-                        <button type="button" class="btn  flex-1 bg-color-blue text-color-white hover:bg-color-white hover:text-black">More Info</button>
+                        <button type="button" className="btn  flex-1 bg-color-blue text-color-white hover:bg-color-white hover:text-black">More Info</button>
                     </div>
                 </div>
             </div>
