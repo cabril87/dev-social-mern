@@ -37,7 +37,7 @@ const MoreFeatures = () => {
                 </div>
                 <div className="flex flex-col rounded-md shadow-md  ">
                     <div className="p-6 flex flex-col items-center ">
-                        <img className="mb-5 mt-12" src={chat} alt="chat" />
+                        <img className=" mt-12" src={chat} alt="chat" />
                         <h3 className="mt-5 mb-2 text-color-blue text-lg mt-12"><b>Content Sharing</b></h3>
                         <p className="mb-2 text-color-grey font-light ">Feel more connected, post and share even when your friends are far away.</p>
                     </div>
