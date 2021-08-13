@@ -8,10 +8,10 @@ const Features = () => {
     return (
         <section className="bg-color-white
          py-20  
-         lg:w-auto
+         
          mt-20 
          
-         w-11/12 
+         w-12/12 
         
          
          ">

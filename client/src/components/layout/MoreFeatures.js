@@ -6,14 +6,14 @@ import connect from '../../img/connect.png'
 const MoreFeatures = () => {
     return (
         <section className="py-20 mt-20 items-center">
-            <div className="lg:items-center lg:w-full  lg:mb-32 ">
+            <div className="lg:items-center  lg:mb-32 ">
                 <h1 className="text-6xl text-center text-color-blue items-center "><b>More Features? <span className="text-color-purple">YES</span></b></h1>
-                <p className="text-color-grey my-4 text-center items-center lg:w-full m-4 w-80">
+                <p className="text-color-grey my-4 text-center items-center  m-4 ">
                     We got more features and more ways to connect. Please let us know if got a favorite you like prioritized.
                 </p>
             </div>
-            <div className="container mx-auto justify-items-center grid grid-col-1 md:grid-cols-3 lg:grid-col-3 gap-16 max-w-screen-lg mt-16 mb-16 items-center">
-                <div className="flex flex-col rounded-md shadow-md w-80 ">
+            <div className="grid grid-col-1 md:grid-cols-3 lg:grid-col-3 gap-16  mt-16 mb-16 justify-center mx-6 lg:mx-24">
+                <div className="flex flex-col rounded-md shadow-md  ">
                     <div className="p-6 flex flex-col items-center ">
                         <img src={connect} alt="chat" />
                         <h3 className="mt-5 mb-2 text-color-blue text-lg"><b>Messaging</b></h3>
@@ -24,10 +24,10 @@ const MoreFeatures = () => {
                         <button type="button" class="btn  flex-1 bg-color-blue text-color-white hover:bg-color-white hover:text-black">More Info</button>
                     </div>
                 </div>
-                <div className="flex flex-col rounded-md shadow-md w-80 ">
+                <div className="flex flex-col rounded-md shadow-md  ">
                     <div className="p-6 flex flex-col items-center ">
                         <img src={res} alt="chat" />
-                        <h3 className="mt-5 mb-2 text-color-blue text-lg"><b>Versatility and Responsiveness</b></h3>
+                        <h3 className="mt-5 mb-2 text-color-blue text-lg "><b>Versatility & Responsiveness</b></h3>
                         <p className="mb-2 text-color-grey font-light ">Things look excellent whether on your phone or on your computer</p>
                     </div>
                     <hr className="border-b border-color-white" />
@@ -35,10 +35,10 @@ const MoreFeatures = () => {
                         <button type="button" class="btn  flex-1 bg-color-blue text-color-white hover:bg-color-white hover:text-black">More Info</button>
                     </div>
                 </div>
-                <div className="flex flex-col rounded-md shadow-md w-80 ">
+                <div className="flex flex-col rounded-md shadow-md  ">
                     <div className="p-6 flex flex-col items-center ">
                         <img className="mb-5 mt-12" src={chat} alt="chat" />
-                        <h3 className="mt-5 mb-2 text-color-blue text-lg"><b>Content Sharing</b></h3>
+                        <h3 className="mt-5 mb-2 text-color-blue text-lg mt-12"><b>Content Sharing</b></h3>
                         <p className="mb-2 text-color-grey font-light ">Feel more connected, post and share even when your friends are far away.</p>
                     </div>
                     <hr className="border-b border-color-white" />
