@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import fire from '../../img/fire.png'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { setAlert } from '../../actions/alert'
+import PropTypes from 'prop-types'
+
 // import axios from 'axios'
 
-const Register = () => {
+const Register = ({ setAlert }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -15,7 +19,12 @@ const Register = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        if (password !== password2) {
 
+            setAlert("Password do not match!", 'red')
+        } else {
+            console.log('SUCCESS')
+        }
         //without redux
         // if(password !== password2){
 
@@ -64,7 +73,7 @@ const Register = () => {
 
                         <input
                             type='text'
-                            className={`w-full p-2 bg-color-white  text-color-white  rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 bg-color-white  text-color-blue  rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
 
                             placeholder='Name'
                             onChange={e => handleChange(e)}
@@ -77,7 +86,7 @@ const Register = () => {
 
                         <input
                             type='email'
-                            className={`w-full p-2 bg-color-white  text-color-white rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 bg-color-white  text-color-blue rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
 
                             placeholder='Email'
                             onChange={e => handleChange(e)}
@@ -91,7 +100,7 @@ const Register = () => {
 
                         <input
                             type='password'
-                            className={`w-full p-2 bg-color-white  text-color-white  rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 bg-color-white  text-color-blue  rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
 
                             placeholder='Password'
                             onChange={e => handleChange(e)}
@@ -104,7 +113,7 @@ const Register = () => {
 
                         <input
                             type='password'
-                            className={`w-full p-2 bg-color-white  text-color-white  rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 bg-color-white  text-color-blue  rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
 
                             placeholder='Comfirm Password'
                             onChange={e => handleChange(e)}
@@ -136,4 +145,8 @@ const Register = () => {
     )
 }
 
-export default Register
+Register.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+}
+
+export default connect(null, { setAlert })(Register)

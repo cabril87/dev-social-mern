@@ -46,7 +46,7 @@ const Features = () => {
             hidden
             lg:block
             overflow-hidden
-            bg-color-purple
+            bg-color-blue
             rounded-r-full
             absolute
             h-80
@@ -81,7 +81,7 @@ const Features = () => {
             hidden
             lg:block
             overflow-hidden
-            bg-color-purple
+            bg-color-blue
             rounded-l-full
             absolute
             h-80
@@ -118,7 +118,7 @@ const Features = () => {
             hidden
             lg:block
             overflow-hidden
-            bg-color-purple
+            bg-color-blue
             rounded-r-full
             absolute
             h-80

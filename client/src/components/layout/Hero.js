@@ -30,7 +30,7 @@ const Hero = () => {
                 <h2 className="text-color-blue text-6xl lg:text-3xl text-center lg:text-left mb-6">
                     <b><span className="text-color-red text-8xl">Dev</span>Social</b>
                 </h2>
-                <p className="text-color-grey text-lg text-center lg:text-left mb-6 ">A place for developers to connect, learn, and share knowledge.</p>
+                <p className="text-color-grey text-lg text-center lg:text-left mb-6 "><b className="text-2xl text-color-blue">Hi</b>, im <b className="text-2xl text-color-red">Dev</b>, welcome to a place for people to connect, learn, and share knowledge.</p>
                 <div className="flex justify-center  gap-6">
                     <Link to="/register">
                         <button type="button" className="btn bg-color-blue text-white w-32 hover:bg-color-grey">
