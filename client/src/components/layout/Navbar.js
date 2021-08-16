@@ -11,6 +11,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     const authLinks = (
         <ul className="hidden sm:flex flex-1 justify-end items-center gap-5 uppercase text-xs lg:mr-32">
+            <li className="cursor-pointer">
+                <Link to="/dashboard">Your Profile</Link>
+            </li>
             <Link to="/">
                 <button
                     type="button"

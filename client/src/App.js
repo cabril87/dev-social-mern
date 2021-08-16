@@ -10,6 +10,8 @@ import store from './store';
 import Alert from './components/layout/Alert';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/routings/PrivateRoute';
 
 if(localStorage.token) {
   setAuthToken(localStorage.token)
@@ -31,6 +33,7 @@ useEffect(() => {
           <Switch>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
         </>
       </Router>
