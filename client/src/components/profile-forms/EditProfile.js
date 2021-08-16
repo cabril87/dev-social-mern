@@ -1,27 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createProfile } from '../../actions/profile';
+import { createProfile, getCurrentProfile } from '../../actions/profile';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitterSquare, faFacebookSquare, faYoutubeSquare, faLinkedin, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 
-const CreateProfile = ({ createProfile, history }) => {
-    const [formData, setFormData] = useState({
-        company: '',
-        website: '',
-        location: '',
-        status: '',
-        skills: '',
-        githubusername: '',
-        bio: '',
-        twitter: '',
-        facebook: '',
-        linkedin: '',
-        youtube: '',
-        instagram: ''
-    });
-    const [toggleSocial, setToggleSocial] = useState(false)
+
+const initialState = {
+    company: '',
+    website: '',
+    location: '',
+    status: '',
+    skills: '',
+    githubusername: '',
+    bio: '',
+    twitter: '',
+    facebook: '',
+    linkedin: '',
+    youtube: '',
+    instagram: ''
+  };
+
+
+const EditProfile = ({
+    profile: { profile, loading },
+    createProfile,
+    getCurrentProfile,
+    history
+}) => {
+
+    const [formData, setFormData] = useState(initialState);
+    const [toggleSocial, setToggleSocial] = useState(false);
+
+    useEffect(() => {
+        if (!profile) getCurrentProfile();
+        if (!loading && profile) {
+          const profileData = { ...initialState };
+          for (const key in profile) {
+            if (key in profileData) profileData[key] = profile[key];
+          }
+          for (const key in profile.social) {
+            if (key in profileData) profileData[key] = profile.social[key];
+          }
+          if (Array.isArray(profileData.skills))
+            profileData.skills = profileData.skills.join(', ');
+          setFormData(profileData);
+        }
+      }, [loading, getCurrentProfile, profile]);
 
     const {
         company,
@@ -42,7 +68,7 @@ const CreateProfile = ({ createProfile, history }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        createProfile(formData, history)
+        createProfile(formData, history, true)
     }
 
     return (
@@ -242,7 +268,7 @@ const CreateProfile = ({ createProfile, history }) => {
                         </>}
 
                     <input type="submit" className="btn flex-1 btn bg-color-blue text-white text-center mr-3 w-32 h-12 mt-4" />
-                    <a className=" flex-1 text m-3 w-32 h-16 text-xs text-color-red" href="dashboard.html"><b>Go Back</b></a>
+                    <Link className=" flex-1 text m-3 w-32 h-16 text-xs text-color-red" to="/dashboard"><b>Go Back</b></Link>
                 </form>
             </section>
 
@@ -250,9 +276,14 @@ const CreateProfile = ({ createProfile, history }) => {
     )
 };
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = state => ({
+    profile: state.profile
+})
 
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile));

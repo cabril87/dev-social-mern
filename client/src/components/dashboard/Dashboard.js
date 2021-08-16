@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCurrentProfile } from '../../actions/profile';
 import { BounceLoader } from "react-spinners";
+import DashboardActions from './DashboardActions';
 
 
 const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
@@ -24,7 +25,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                     </p>
                     {profile !== null ?
                         <>
-                            has
+                            <DashboardActions />
                         </>
                         :
                         <>
