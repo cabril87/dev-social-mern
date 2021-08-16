@@ -9,6 +9,7 @@ module.exports = {
         "color-blue": "#242A45",
         "color-grey": "#9194A2",
         "color-white": "#f7f7f7",
+        "color-hot-blue" : "rgb(0,172,220)"
       },
       textColor: {
         'primary': '#3490dc',
@@ -17,6 +18,14 @@ module.exports = {
       },
       fontFamily: {
         'amatic-sc': ['"Amatic SC"', 'cursive']
+      },
+      zIndex: {
+        'auto': 'auto',
+        'n2': -2,
+        'n1': -1,
+        '0': 0,
+        '1': 1,
+        '2': 2
       }
     },
   },

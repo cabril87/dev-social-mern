@@ -7,8 +7,11 @@ const Alert = ({ alerts }) =>
     alerts !== null &&
     alerts.length > 0 &&
     alerts.map(alert => (
-        <div key={alert.id} className={`bg-color-${alert.alertType} text-color-white p-3 text-center content-center justify-center z-80 absolute w-full z-10`}>
-            <b>{alert.msg}</b>
+        <div className="flex flex-1 z-100">
+            <div key={alert.id} className={`flex bg-color-${alert.alertType} text-color-white p-3 text-center content-center justify-center relative w-full z-50`}>
+                <b>{alert.msg}</b>
+            </div>
+
         </div>
     ))
 

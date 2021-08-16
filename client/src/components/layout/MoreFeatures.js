@@ -7,7 +7,7 @@ const MoreFeatures = () => {
     return (
         <section className="py-20 mt-20 items-center">
             <div className="lg:items-center  lg:mb-32 ">
-                <h1 className="text-6xl text-center text-color-blue items-center "><b>More Features? <span className="text-color-red">YES</span></b></h1>
+                <h1 className="text-6xl text-center text-color-blue items-center "><b>More Features? <span className="text-color-hot-blue">YES!</span></b></h1>
                 <p className="text-color-grey my-4 text-center items-center  m-4 ">
                     We got more features and more ways to connect. Please let us know if got a favorite you like prioritized.
                 </p>

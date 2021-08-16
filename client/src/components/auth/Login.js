@@ -86,7 +86,7 @@ const Login = () => {
 
                     </div>
                     <p className="flex-1 lg:text-color-grey text-color-blue mt-4 text-center">
-                        Dont have an account? <Link className="flex-1 lg:text-color-blue  text-color-red  " to="/register"><b>Sign Up</b></Link>
+                        Dont have an account? <Link className="flex-1 lg:text-color-hot-blue  text-color-red  " to="/register"><b>Sign Up</b></Link>
                     </p>
                 </form>
 
