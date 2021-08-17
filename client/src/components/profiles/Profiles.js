@@ -1,18 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import ProfileItem from './ProfileItem';
 import { connect } from 'react-redux'
 import { BounceLoader } from "react-spinners";
 import { getProfiles, getCurrentProfile } from '../../actions/profile';
 import SearchBar from '../search/SearchBar';
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const Profiles = ({ getProfiles, getCurrentProfile, auth: { user }, profile: { profiles, loading } }) => {
+    const [filteredData, setFilteredData] = useState([])
 
     useEffect(() => {
         getProfiles()
         getCurrentProfile()
     }, [])
+
+    const handleFilter = (e) => {
+        const searchProfile = e.target.value;
+        const newFilter = profiles.filter((value) => {
+            return value.user.name.toLowerCase().includes(searchProfile)
+        });
+        if (searchProfile === '') {
+            setFilteredData([])
+        } else {
+            setFilteredData(newFilter)
+        }
+    }
 
     return (
         <>
@@ -31,14 +46,25 @@ const Profiles = ({ getProfiles, getCurrentProfile, auth: { user }, profile: { p
                     <p className="flex-1 flex-wrap text-color-grey text-lg text-center   ">
                         Browse and connect with Devanators
                     </p>
-                    <SearchBar />
-                    <div className=' container  mx-auto px-4 flex flex-wrap justify-center md:justify-center'>
-                        <div className="flex flex-wrap text-center m-4">
+                    {filteredData.length === 0 ?
+                        <SearchBar onChange={handleFilter} placeholder='Search' icon={faSearch}/>
+                        :
+                        <SearchBar onChange={handleFilter} placeholder='Search' icon={faTimes}/>
+                    }
 
-                        {profiles.length > 0 ? (profiles.map(profile => (
-                            <ProfileItem key={profile._id} profile={profile} />
-                        ))) : <h4>No profiles found.... </h4>}
-                        </div>
+
+                    <div className=' container  mx-auto px-4 flex flex-wrap justify-center md:justify-center'>
+
+                        {
+                            <div className="flex flex-wrap text-center m-4">
+
+                                {filteredData.length !== 0 && (filteredData.slice(0, 15).map((value, key) => {
+                                    return <ProfileItem key={value._id} profile={value} />
+
+                                }
+                                ))}
+                            </div>
+                        }
                     </div>
                 </section>
                 )}
