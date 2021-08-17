@@ -46,11 +46,14 @@ const Profiles = ({ getProfiles, getCurrentProfile, auth: { user }, profile: { p
                     <p className="flex-1 flex-wrap text-color-grey text-lg text-center   ">
                         Browse and connect with Devanators
                     </p>
-                    {filteredData.length === 0 ?
-                        <SearchBar onChange={handleFilter} placeholder='Search' icon={faSearch}/>
-                        :
-                        <SearchBar onChange={handleFilter} placeholder='Search' icon={faTimes}/>
-                    }
+                    
+
+                        {filteredData.length === 0 ?
+                            <SearchBar onChange={handleFilter} placeholder='Search' icon={faSearch} />
+                            :
+                            <SearchBar onChange={handleFilter} placeholder='Search' icon={faTimes} />
+                        }
+                   
 
 
                     <div className=' container  mx-auto px-4 flex flex-wrap justify-center md:justify-center'>

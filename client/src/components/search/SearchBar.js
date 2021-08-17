@@ -9,8 +9,10 @@ const SearchBar = ({onChange, placeholder, value, icon}) => {
         
     
     return (
-        <div className="p-12">
-            <div className="bg-white flex items-center rounded-full shadow-xl h-12">
+       
+
+        <div className="flex justify-center p-12" >
+            <div className="bg-white flex items-center rounded-full shadow-xl h-12 w-96">
                 <input
                     className="rounded-l-full w-full py-2 px-6 text-gray-700 leading-tight focus:outline-none"
                     type="text" placeholder={placeholder} onChange={onChange} value={value}/>
@@ -21,6 +23,7 @@ const SearchBar = ({onChange, placeholder, value, icon}) => {
                 </div>
             </div>
         </div>
+       
     )
 }
 
