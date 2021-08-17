@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getCurrentProfile } from '../../actions/profile';
+import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import { BounceLoader } from "react-spinners";
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
 
 
-const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
+const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading }, deleteAccount }) => {
 
     useEffect(() => {
         getCurrentProfile()
@@ -21,7 +21,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
             <BounceLoader /> :
             <>
                 <div>
-                    <h1 className="text-color-blue text-6xl text-center  mb-36"><b>Dashboard</b></h1>
+                    <h1 className="text-color-blue text-6xl text-center  mb-24"><b>Dashboard</b></h1>
                     <p className="text-color-grey text-lg text-center  m-10 ">
                         <b className="text-2xl text-color-blue">Hi</b>, <span className="text-2xl text-color-red">{user && user.name.toUpperCase()}</span>
                     </p>
@@ -30,6 +30,15 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                             <DashboardActions />
                             <Experience experience={profile.experience} />
                             <Education education={profile.education} />
+                            <div className='my-4'>
+                                <button 
+                                type="button" 
+                                className="flex-1 btn bg-color-red text-white text-center transform scale-50"
+                                onClick={() => deleteAccount(user._id)}
+                                >
+                                    Delete My Account
+                                </button>
+                            </div>
                         </>
                         :
                         <>
@@ -52,6 +61,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
 
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
 }
@@ -61,4 +71,4 @@ const mapStateToProps = state => ({
     profile: state.profile
 })
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);

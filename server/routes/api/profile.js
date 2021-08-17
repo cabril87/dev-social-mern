@@ -65,7 +65,7 @@ router.put('/experience', [
 ],
     profileUpdateExperience
 )
-router.delete('/experience/:edu_id', auth, profileDeleteExperience)
+router.delete('/experience/:exp_id', auth, profileDeleteExperience)
 router.put('/education', [
     auth,
     [

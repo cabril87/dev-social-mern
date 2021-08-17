@@ -1,24 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { deleteEducation } from '../../actions/profile';
 import { connect } from 'react-redux';
 import Moment from 'react-moment'
 
-const Education = ({ education }) => {
+const Education = ({ education, deleteEducation }) => {
     const educations = education.map(edu => (
-        <tr key={edu.id}>
+        <tr key={edu._id}>
             <td className=' p-2 text-xs'>{edu.school}</td>
             <td className=' p-2 text-xs'>{edu.degree}</td>
             <td className=' p-2 text-xs'>
                 <Moment format='YYYY/MM/DD'>{edu.from}</Moment> - {' '}
-                {edu.to === null ? (
-                    ' Now '
-                ) : (
+                {edu.to  ? (
+
                     <Moment format='YYYY/MM/DD'>{edu.to}</Moment>
+                ) : (
+                    ' Now '
                 )}
 
             </td>
             <td>
-                <button className=" btn bg-color-red text-white text-center m-2 text-xs transform scale-50">Delete</button>
+                <button
+                    className=" btn bg-color-red text-white text-center m-2 text-xs transform scale-50"
+                    onClick={() => deleteEducation(edu._id)}
+                >
+                    Delete
+                </button>
             </td>
         </tr>
     ))
@@ -31,7 +38,7 @@ const Education = ({ education }) => {
                         <th className=' shadow  p-2 bg-color-grey text-color-blue text-sm'>School</th>
                         <th className=' shadow  p-2 bg-color-grey text-color-blue text-sm'>Degree</th>
                         <th className=' shadow  p-2 bg-color-grey text-color-blue text-sm'>Years</th>
-                        <th className=' shadow  p-2 bg-color-grey text-color-blue text-sm'/>
+                        <th className=' shadow  p-2 bg-color-grey text-color-blue text-sm' />
                     </tr>
                 </thead>
                 <tbody className='m-2'>{educations}</tbody>
@@ -41,7 +48,8 @@ const Education = ({ education }) => {
 }
 
 Education.propTypes = {
-    experience: PropTypes.array.isRequired,
-}
+    education: PropTypes.array.isRequired,
+    deleteEducation: PropTypes.func.isRequired
+};
 
-export default Education
+export default connect(null, { deleteEducation })(Education);

@@ -1,5 +1,6 @@
 import Profile from "../models/Profile.js";
 import User from "../models/User.js";
+import Posts from "../models/Posts.js"
 import { validationResult } from "express-validator";
 import request from "request";
 import config from "config";
@@ -118,8 +119,8 @@ export const profileGetOneUser = async (req, res) => {
 
 export const profileDelete = async (req, res) => {
     try {
-        //Remove user post
-
+        //Remove user posts
+        await Posts.deleteMany({ user: req.user.id });
         //Remove profile
         await Profile.findOneAndRemove({ user: req.user.id })
         //Remove User
