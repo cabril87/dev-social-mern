@@ -131,7 +131,29 @@ export const profileDelete = async (req, res) => {
     }
 }
 
+
+
 export const profileAddExperience = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        profile.experience.unshift(req.body);
+
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
+
+export const profileUpdateExperience = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
@@ -167,7 +189,7 @@ export const profileAddExperience = async (req, res) => {
     if (description) profileFields.experience.description = description;
 
     try {
-        let profile = await Profile.findOne({ user: req.user.id })
+        const profile = await Profile.findOne({ user: req.user.id })
 
         if (profile) {
             profile = await Profile.findOneAndUpdate(
@@ -187,8 +209,6 @@ export const profileAddExperience = async (req, res) => {
         console.error(error.message);
         res.status(500).send('Server Error')
     }
-
-
 }
 
 export const profileDeleteExperience = async (req, res) => {
@@ -207,7 +227,7 @@ export const profileDeleteExperience = async (req, res) => {
     }
 }
 
-export const profileAddEducation = async (req, res) => {
+export const profileUpdateEducation = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
@@ -265,6 +285,26 @@ export const profileAddEducation = async (req, res) => {
     }
 
 
+}
+
+export const profileAddEducation = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        profile.education.unshift(req.body);
+
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 }
 
 export const profileDeleteEducation = async (req, res) => {

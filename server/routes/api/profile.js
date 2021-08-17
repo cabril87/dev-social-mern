@@ -8,8 +8,10 @@ import {
     profileGetOneUser,
     profileDelete,
     profileAddExperience,
+    profileUpdateExperience,
     profileDeleteExperience,
     profileAddEducation,
+    profileUpdateEducation,
     profileDeleteEducation,
     profileGithub
 } from '../../controllers/profileController.js'
@@ -47,6 +49,22 @@ router.put('/experience', [
 ],
     profileAddExperience
 )
+router.put('/experience', [
+    auth,
+    [
+        check('title', 'Title is required')
+            .not()
+            .isEmpty(),
+        check('company', 'Company is required')
+            .not()
+            .isEmpty(),
+        check('from', 'From date is required')
+            .not()
+            .isEmpty(),
+    ]
+],
+    profileUpdateExperience
+)
 router.delete('/experience/:edu_id', auth, profileDeleteExperience)
 router.put('/education', [
     auth,
@@ -66,6 +84,25 @@ router.put('/education', [
     ]
 ],
     profileAddEducation
+)
+router.put('/education', [
+    auth,
+    [
+        check('school', 'School is required')
+            .not()
+            .isEmpty(),
+        check('degree', 'Degree is required')
+            .not()
+            .isEmpty(),
+        check('fieldofstudy', 'Field of study date is required')
+            .not()
+            .isEmpty(),
+        check('from', 'From date is required')
+            .not()
+            .isEmpty(),
+    ]
+],
+    profileUpdateEducation
 )
 router.delete('/education/:edu_id', auth, profileDeleteEducation)
 router.get('/github/:username', profileGithub)

@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { getCurrentProfile } from '../../actions/profile';
 import { BounceLoader } from "react-spinners";
 import DashboardActions from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 
 const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
@@ -26,6 +28,8 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
                     {profile !== null ?
                         <>
                             <DashboardActions />
+                            <Experience experience={profile.experience} />
+                            <Education education={profile.education} />
                         </>
                         :
                         <>
