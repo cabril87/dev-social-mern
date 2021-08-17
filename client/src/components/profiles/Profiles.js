@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import ProfileItem from './ProfileItem';
 import { connect } from 'react-redux'
 import { BounceLoader } from "react-spinners";
 import { getProfiles, getCurrentProfile } from '../../actions/profile';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faSearch } from '@fortawesome/free-solid-svg-icons';
+import SearchBar from '../search/SearchBar';
 
-const Profiles = ({ getProfiles, getCurrentProfile, auth: { user }, profile: { Profiles, loading } }) => {
+
+const Profiles = ({ getProfiles, getCurrentProfile, auth: { user }, profile: { profiles, loading } }) => {
 
     useEffect(() => {
         getProfiles()
+        getCurrentProfile()
     }, [])
 
     return (
         <>
 
             {loading ? <BounceLoader /> :
-                (<section className='my-10'>
+                (<section className='my-10 '>
 
                     <p className="text-color-grey text-lg text-center  mx-10 my-2">
                         <b className="text-2xl text-color-blue">
@@ -27,16 +29,15 @@ const Profiles = ({ getProfiles, getCurrentProfile, auth: { user }, profile: { P
                         </span>
                     </p>
                     <p className="flex-1 flex-wrap text-color-grey text-lg text-center   ">
-                        Say hi to some fellow Devanators
+                        Browse and connect with Devanators
                     </p>
-                    <div class="p-12">
-                        <div class="bg-white flex items-center rounded-full shadow-xl">
-                            <input className="rounded-l-full w-full py-2 px-6 text-gray-700 leading-tight focus:outline-none" id="search" type="text" placeholder="Search" />
-                            <div class="p-4">
-                                <button class="bg-color-blue text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
-                                <FontAwesomeIcon icon={faSearch} className="text-3xl m-2 text-color-hot-blue" />
-                                </button>
-                            </div>
+                    <SearchBar />
+                    <div className=' container  mx-auto px-4 flex flex-wrap justify-center md:justify-center'>
+                        <div className="flex flex-wrap text-center m-4">
+
+                        {profiles.length > 0 ? (profiles.map(profile => (
+                            <ProfileItem key={profile._id} profile={profile} />
+                        ))) : <h4>No profiles found.... </h4>}
                         </div>
                     </div>
                 </section>
