@@ -9,7 +9,8 @@ import {
     PROFILE_ERROR,
     ACCOUNT_DELETED,
     CLEAR_PROFILE,
-    GET_REPOS
+    GET_REPOS,
+    ADD_IMAGE
 } from './types';
 
 export const getCurrentProfile = () => async dispatch => {
@@ -62,7 +63,7 @@ export const getProfileById = (userId) => async dispatch => {
     }
 }
 //create or update profile
-export const createProfile = (formData, history, edit = false) => async dispatch => {
+export const createProfile = (formData, picData, history, edit = false) => async dispatch => {
     try {
         const config = {
             headers: {
@@ -70,10 +71,14 @@ export const createProfile = (formData, history, edit = false) => async dispatch
             }
         }
 
-        const res = await axios.post('/api/profile', formData, config);
+        const res = await axios.post('/api/profile', formData, picData, config);
 
         dispatch({
             type: GET_PROFILE,
+            payload: res.data
+        });
+        dispatch({
+            type: ADD_IMAGE,
             payload: res.data
         });
 

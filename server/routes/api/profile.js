@@ -14,20 +14,23 @@ import {
     profileUpdateEducation,
     profileDeleteEducation,
     profileGithub
-} from '../../controllers/profileController.js'
+} from '../../controllers/profileController.js';
+import upload from "../../config/multer.js";
+
 
 const router = express.Router();
 
 router.get('/me', auth, profileGetOne);
-router.post('/', [
-    auth,
-    check('status', 'Status is required')
-        .not()
-        .isEmpty(),
-    check('skills', 'Skills is required')
-        .not()
-        .isEmpty()
-],
+router.post('/', auth, upload.single('image'),
+// [
+//     auth,
+//     check('status', 'Status is required')
+//         .not()
+//         .isEmpty(),
+//     check('skills', 'Skills is required')
+//         .not()
+//         .isEmpty()
+// ],
     profileCreateOne
 );
 router.get('/', profileGetAll)

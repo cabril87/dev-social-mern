@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile } from '../../actions/profile';
@@ -6,8 +6,10 @@ import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitterSquare, faFacebookSquare, faYoutubeSquare, faLinkedin, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 
+
 const CreateProfile = ({ createProfile, history }) => {
     const [formData, setFormData] = useState({
+
         company: '',
         website: '',
         location: '',
@@ -22,6 +24,7 @@ const CreateProfile = ({ createProfile, history }) => {
         instagram: ''
     });
     const [toggleSocial, setToggleSocial] = useState(false)
+    const [picData, setPicData] = useState({ avatar: '' });
 
     const {
         company,
@@ -38,6 +41,10 @@ const CreateProfile = ({ createProfile, history }) => {
         instagram
     } = formData;
 
+    
+
+    
+    const handlePic = e => setPicData(picData);
     const handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleSubmit = e => {
@@ -71,6 +78,21 @@ const CreateProfile = ({ createProfile, history }) => {
                     className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
                     onSubmit={e => handleSubmit(e)}
                 >
+                    <div className="form-group mb-4">
+                        <img src={picData} alt='' className="profilePic w-40 h-40" />
+                        <input
+                            type="file"
+                            placeholder="Company"
+                            name="company"
+                            className="appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            // value={avatar}
+                            onChange={(e) => handlePic(e)}
+                        />
+                        <small className="text-color-blue text-xs italic">
+                            Could be your own company or one you work for
+                        </small>
+                        
+                    </div>
                     <div className="form-group mb-4">
                         <select
                             name="status"

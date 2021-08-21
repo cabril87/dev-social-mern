@@ -14,8 +14,8 @@ const Profiles = ({ getProfiles, getCurrentProfile, auth: { user }, profile: { p
 
     useEffect(() => {
         getProfiles()
-        getCurrentProfile()
-    }, [])
+        
+    }, [getProfiles])
 
     const handleFilter = (e) => {
         const searchProfile = e.target.value;
@@ -43,7 +43,7 @@ const Profiles = ({ getProfiles, getCurrentProfile, auth: { user }, profile: { p
                             {user ? user && user.name.toUpperCase() : ''}
                         </span>
                     </p>
-                    <p className="flex-1 flex-wrap text-color-grey text-lg text-center   ">
+                    <p className="flex-1 flex-wrap text-black text-lg text-center   ">
                         Browse and connect with Devanators
                     </p>
                     

@@ -4,6 +4,10 @@ import Posts from "../models/Posts.js"
 import { validationResult } from "express-validator";
 import request from "request";
 import config from "config";
+import cloudinary from "../config/cloudinary.js"
+import upload from '../config/multer.js'
+
+
 
 
 
@@ -12,7 +16,7 @@ export const profileGetOne = async (req, res) => {
         const profile = await Profile.findOne({
             user: req.user.id
         })
-            .populate('user', ['name', 'avatar']);
+            .populate('user', ['name']);
 
         if (!profile) {
             return res.status(400).json({ msg: 'There is no profile for this user' })
@@ -44,13 +48,19 @@ export const profileCreateOne = async (req, res) => {
         facebook,
         twitter,
         instagram,
-        linkedin
+        linkedin,
+        avatar,
+        cloudinary_id,
+
     } = req.body;
+
 
     //Build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
+
     if (company) profileFields.company = company;
+    if (status) profileFields.status = status;
     if (website) profileFields.website = website;
     if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
@@ -66,10 +76,22 @@ export const profileCreateOne = async (req, res) => {
     if (linkedin) profileFields.social.linkedin = linkedin;
     if (instagram) profileFields.social.instagram = instagram;
 
+    profileFields.image = {}
+
+    if (avatar) profileFields.image.avatar = avatar;
+    if (cloudinary_id) profileFields.image.cloudinary_id = cloudinary_id;
+
     try {
+
         let profile = await Profile.findOne({
-            user: req.user.id
+            user: req.user.id,
+
+
         });
+
+
+
+
         if (profile) {
             profile = await Profile.findOneAndUpdate(
                 { user: req.user.id },
@@ -79,8 +101,17 @@ export const profileCreateOne = async (req, res) => {
             return res.json(profile)
         }
 
+
+        const result = await cloudinary.uploader.upload(req.file.path);
         //Create
-        profile = new Profile(profileFields);
+        profile = new Profile({
+            profileFields: profileFields,
+            image: {
+                avatar: result.secure_url,
+                cloudinary_id: result.public_id
+            }
+
+        });
         await profile.save()
         res.json(profile)
 
@@ -92,7 +123,7 @@ export const profileCreateOne = async (req, res) => {
 
 export const profileGetAll = async (req, res) => {
     try {
-        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+        const profiles = await Profile.find().populate('user');
         res.json(profiles);
     } catch (err) {
         console.error(err.message);
@@ -102,7 +133,7 @@ export const profileGetAll = async (req, res) => {
 
 export const profileGetOneUser = async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar', 'image']);
 
         if (!profile) {
             return res.status(400).json({ msg: 'Profile not found ' })

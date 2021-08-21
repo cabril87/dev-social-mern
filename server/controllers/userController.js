@@ -1,6 +1,5 @@
 import { validationResult } from "express-validator"
 import User from '../models/User.js'
-import gravatar from 'gravatar'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import config from 'config'
@@ -12,7 +11,7 @@ export const userController = async (req, res) => {
         return res.status(400).json({ errors: errors.array() })
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, password} = req.body;
 
     try {
         //See if the user exist
@@ -23,17 +22,11 @@ export const userController = async (req, res) => {
         }
 
         //Get users gravatars
-        const avatar = gravatar.url(email, {
-            s: '200',
-            r: 'pg',
-            d: 'mm'
-        })
-
+       
         user = new User({
             name,
             email,
-            avatar,
-            password
+            password,
         })
 
         //Encrypt password

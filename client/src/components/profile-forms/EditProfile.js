@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitterSquare, faFacebookSquare, faYoutubeSquare, faLinkedin, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 
 
+
 const initialState = {
     company: '',
     website: '',
@@ -77,7 +78,7 @@ const EditProfile = ({
                 <div className="flex flex-col items-center ">
 
                     <h1 className="text-color-blue text-6xl text-center  mb-2">
-                        <b>Create Your </b><b className="text-color-red text-8xl">Profile</b>
+                        <b>Edit Your </b><b className="text-color-red text-8xl">Profile</b>
                     </h1>
                     <div className="text-left">
 
@@ -97,6 +98,7 @@ const EditProfile = ({
                     className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
                     onSubmit={e => handleSubmit(e)}
                 >
+                    
                     <div className="form-group mb-4">
                         <select
                             name="status"

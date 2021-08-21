@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
 const ProfileItem = ({ profile: {
-    user: { _id, name, avatar },
+    user: { _id, name, avatar, image },
     status,
     company,
     location,
@@ -18,7 +18,7 @@ const ProfileItem = ({ profile: {
 
             </div>
             <div className="flex justify-center mt-4">
-                <img src={avatar} alt="" className="shadow sm:w-12 sm:h-12 w-10 h-10 rounded-full" />
+                <img src={image} alt="" className="shadow sm:w-12 sm:h-12 w-10 h-10 rounded-full" />
             </div>
             <div className="mt-6 flex justify-between text-center">
                 <div>

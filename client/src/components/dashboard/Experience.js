@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import Moment from 'react-moment'
 
 const Experience = ({ experience, deleteExperience }) => {
-    const experiences = experience.map(edu => (
-        <tr key={edu._id}>
+    const experiences = experience.map((edu, i) => (
+        <tr key={i}>
             <td className=' p-2 text-xs'>{edu.title}</td>
             <td className=' p-2 text-xs'>{edu.company}</td>
             <td className=' p-2 text-xs'>
